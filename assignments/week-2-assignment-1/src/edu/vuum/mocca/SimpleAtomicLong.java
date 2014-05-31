@@ -31,6 +31,9 @@ class SimpleAtomicLong
     public SimpleAtomicLong(long initialValue)
     {
         // TODO -- you fill in here
+    	mRWLock.writeLock().lock();
+    	mValue = initialValue;
+    	mRWLock.writeLock().unlock();
     }
 
     /**
@@ -43,7 +46,9 @@ class SimpleAtomicLong
         long value;
 
         // TODO -- you fill in here
-
+        mRWLock.readLock().lock();
+        value = mValue;
+        mRWLock.readLock().unlock();
         return value;
     }
 
@@ -57,7 +62,10 @@ class SimpleAtomicLong
         long value = 0;
 
         // TODO -- you fill in here
-
+        mRWLock.writeLock().lock();
+        mValue--;
+        value = mValue;
+        mRWLock.writeLock().unlock();
         return value;
     }
 
@@ -71,7 +79,10 @@ class SimpleAtomicLong
         long value = 0;
 
         // TODO -- you fill in here
-
+        mRWLock.writeLock().lock();
+        value = mValue;
+        mValue++;
+        mRWLock.writeLock().unlock();
         return value;
     }
 
@@ -85,7 +96,10 @@ class SimpleAtomicLong
         long value = 0;
 
         // TODO -- you fill in here
-
+        mRWLock.writeLock().lock();
+        value = mValue;
+        mValue--;
+        mRWLock.writeLock().unlock();
         return value;
     }
 
@@ -99,7 +113,10 @@ class SimpleAtomicLong
         long value = 0;
 
         // TODO -- you fill in here
-
+        mRWLock.writeLock().lock();
+        mValue++;
+        value = mValue;
+        mRWLock.writeLock().unlock();
         return value;
     }
 }
